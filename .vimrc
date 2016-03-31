@@ -19,6 +19,18 @@ set smartcase     " unless uppercase letters are used in the regex.
 set smarttab      " Handle tabs more intelligently
 set hlsearch      " Highlight searches by default.
 set incsearch     " Incrementally search while typing a /regex
+set nowrap        " avoid wrap
+
+" custom coble the list of buffers
+let g:airline#extensions#tabline#enabled = 1
+" Show just the filename
+let g:airline#extensions#tabline#fnamemod = ':t'
+
+colorscheme onedark
+
+" enable nerdtree and tabs
+let g:nerdtree_tabs_open_on_console_startup=1
+map <Leader>n <plug>NERDTreeTabsToggle<CR>
 
 " Softtabs, 2 spaces
 set tabstop=2
@@ -30,12 +42,16 @@ set expandtab
 set list listchars=tab:»·,trail:·,nbsp:·
 
 " Make it obvious where 80 characters is
-"set textwidth=80
-"set colorcolumn=+1
+set textwidth=80
+set colorcolumn=+1
 
 " Numbers
 set number
 set numberwidth=5
+
+" autocmd vimenter * NERDTree
+autocmd VimEnter * wincmd p
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -56,9 +72,33 @@ Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'kien/ctrlp.vim'
 Plugin 'bling/vim-airline'
 Plugin 'editorconfig/editorconfig-vim'
-
+Plugin 'airblade/vim-gitgutter'
+Plugin 'joshdick/airline-onedark.vim'
 call vundle#end()
 """"
+let g:airline_theme='onedark'
+
+" buffer config
+" This allows buffers to be hidden if you've modified a buffer.
+" This is almost a must if you wish to use buffers in this way.
+set hidden
+
+" To open a new empty buffer
+nmap <leader>T :enew<cr>
+
+" Move to the next buffer
+nmap <leader>l :bnext<CR>
+
+" Move to the previous buffer
+nmap <leader>h :bprevious<CR>
+
+" Close the current buffer and move to the previous one
+" This replicates the idea of closing a tab
+nmap <leader>bq :bp <BAR> bd #<CR>
+
+" Show all open buffers and their status
+nmap <leader>bl :ls<CR>
+
 
 filetype plugin indent on
 
@@ -105,11 +145,6 @@ function! InsertTabWrapper()
         return "\<c-p>"
     endif
 endfunction
-
-" vim-rspec mappings
-nnoremap <Leader>t :call RunCurrentSpecFile()<CR>
-nnoremap <Leader>s :call RunNearestSpec()<CR>
-nnoremap <Leader>l :call RunLastSpec()<CR>
 
 " Run commands that require an interactive shell
 nnoremap <Leader>r :RunInInteractiveShell<space>
