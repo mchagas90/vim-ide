@@ -21,10 +21,6 @@ set hlsearch      " Highlight searches by default.
 set incsearch     " Incrementally search while typing a /regex
 set nowrap        " avoid wrap
 
-colorscheme onedark
-" uncomment if your terminal does not support 256 colors
-" let g:onedark_termcolors=16
-
 " enable nerdtree and tabs
 let g:nerdtree_tabs_open_on_console_startup=1
 map <Leader>n <plug>NERDTreeTabsToggle<CR>
@@ -76,6 +72,10 @@ Plugin 'joshdick/airline-onedark.vim'
 
 call vundle#end()
 """"
+
+colorscheme onedark
+" uncomment if your terminal does not support 256 colors
+" let g:onedark_termcolors=16
 
 " airline configs
 " set guifont=Liberation\ Mono\ for\ Powerline\ 10
