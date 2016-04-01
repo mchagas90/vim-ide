@@ -71,14 +71,24 @@ Plugin 'joshdick/onedark.vim'
 Plugin 'joshdick/airline-onedark.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rails'
+
+" completition / snippets
 Plugin 'ervandew/supertab'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
-Plugin 'mhinz/vim-signify'
+
+" buffers as tabs
+Plugin 'ap/vim-buftabline'
+
 call vundle#end()
 """"
+
+" change between buffer tabs
+nnoremap <C-O> :bnext<CR>
+nnoremap <C-I> :bprev<CR>
+
 
 colorscheme onedark
 " uncomment if your terminal does not support 256 colors
@@ -93,14 +103,12 @@ colorscheme onedark
 set t_Co=256
 
 " custom coble the list of buffers
-let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#enabled = 1
 " Show just the filename
-let g:airline#extensions#tabline#fnamemod = ':t'
+"let g:airline#extensions#tabline#fnamemod = ':t'
 
-let g:airline#extensions#hunks#enabled=0
-
+let g:airline#extensions#hunks#enabled=1
 let g:airline_theme='onedark'
-
 let g:airline_powerline_fonts = 1
 
 if !exists('g:airline_symbols')
