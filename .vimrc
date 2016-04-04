@@ -7,15 +7,15 @@ set showcmd       " display incomplete commands
 set incsearch     " do incremental searching
 set laststatus=2  " Always display the status line
 set autowrite     " Automatically :write before running commands
-set cursorline    " highlight current line
-set cursorcolumn  " highlight column
+"set cursorline    " highlight current line
+"set cursorcolumn  " highlight column
 set ic            " search case insensitive
 set bg=dark       " dark terminal
 set mouse=a       " enable mouse
 set vb t_vb=      " disable all bells.
 set confirm       " Y-N-C prompt if closing with unsaved changes.
 set showcmd       " show incomplete normal mode commands as I type.
-set smartcase     " unless uppercase letters are used in the regex.
+"set smartcase     " unless uppercase letters are used in the regex.
 set smarttab      " Handle tabs more intelligently
 set hlsearch      " Highlight searches by default.
 set incsearch     " Incrementally search while typing a /regex
@@ -32,7 +32,7 @@ set shiftround
 set expandtab
 
 " Display extra whitespace
-set list listchars=tab:»·,trail:·,nbsp:·
+set list listchars=tab:»·,trail:·,nbsp:·,space:·
 
 " Make it obvious where 80 characters is
 set textwidth=80
@@ -47,10 +47,7 @@ autocmd VimEnter * wincmd p
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
-  syntax on
-endif
+syntax on
 
 """ VUNDLE
 set rtp+=~/.vim/bundle/Vundle.vim/
@@ -79,8 +76,9 @@ Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
 
+Plugin 'mileszs/ack.vim'
 " buffers as tabs
-Plugin 'ap/vim-buftabline'
+"Plugin 'ap/vim-buftabline'
 
 call vundle#end()
 """"
@@ -88,7 +86,6 @@ call vundle#end()
 " change between buffer tabs
 nnoremap <C-O> :bnext<CR>
 nnoremap <C-I> :bprev<CR>
-
 
 colorscheme onedark
 " uncomment if your terminal does not support 256 colors
@@ -103,9 +100,9 @@ colorscheme onedark
 set t_Co=256
 
 " custom coble the list of buffers
-"let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
 " Show just the filename
-"let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#fnamemod = ':t'
 
 let g:airline#extensions#hunks#enabled=1
 let g:airline_theme='onedark'
@@ -156,19 +153,16 @@ set hidden
 " To open a new empty buffer
 nmap <leader>T :enew<cr>
 
-" Move to the next buffer
-nmap <leader>l :bnext<CR>
-
-" Move to the previous buffer
-nmap <leader>h :bprevious<CR>
-
-" Close the current buffer and move to the previous one
 " This replicates the idea of closing a tab
 nmap <leader>bq :bp <BAR> bd #<CR>
 
+" Move to the next buffer
+"nmap <leader>l :bnext<CR>
+" Move to the previous buffer
+"nmap <leader>h :bprevious<CR>
+" Close the current buffer and move to the previous one
 " Show all open buffers and their status
-nmap <leader>bl :ls<CR>
-
+"nmap <leader>bl :ls<CR>
 
 filetype plugin indent on
 
@@ -184,9 +178,8 @@ augroup vimrcEx
     \ endif
 
   " Set syntax highlighting for specific file types
-  autocmd BufRead,BufNewFile Appraisals set filetype=ruby
+  autocmd BufRead,BufNewFile *.tt,*.erb set filetype=html
   autocmd BufRead,BufNewFile *.md set filetype=markdown
-  autocmd BufRead,BufNewFile .{jscs,jshint,eslint}rc set filetype=json
 
   " Enable spellchecking for Markdown
   autocmd FileType markdown setlocal spell
@@ -199,7 +192,7 @@ augroup vimrcEx
   autocmd FileType gitcommit setlocal spell
 
   " Allow stylesheets to autocomplete hyphenated words
-  autocmd FileType css,scss,sass setlocal iskeyword+=-
+  "autocmd FileType css,scss,sass setlocal iskeyword+=-
 augroup END
 
 
@@ -216,9 +209,6 @@ function! InsertTabWrapper()
     endif
 endfunction
 
-" Run commands that require an interactive shell
-nnoremap <Leader>r :RunInInteractiveShell<space>
-
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
 
@@ -232,8 +222,28 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
+" Ack shortcut
+nnoremap <C-F> :Ack<space>
+
+" set list on/off
+nnoremap <C-K> :call SetListOnOff()<cr>
+function! SetListOnOff()
+    if &list
+        set nolist
+    else
+        set list!
+    endif
+endfunction
+
 " configure syntastic syntax checking to check on open as well as save
-let g:syntastic_check_on_open=1
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_html_checkers=['']
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 let g:syntastic_eruby_ruby_quiet_messages =
     \ {"regex": "possibly useless use of a variable in void context"}
