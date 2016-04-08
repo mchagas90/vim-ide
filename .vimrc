@@ -76,12 +76,15 @@ Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
 
-Plugin 'mileszs/ack.vim'
+"Plugin 'mileszs/ack.vim'
+Plugin 'rking/ag.vim'
 " buffers as tabs
 "Plugin 'ap/vim-buftabline'
 
 call vundle#end()
 """"
+
+let g:ag_working_path_mode="r"
 
 " change between buffer tabs
 nnoremap <C-O> :bnext<CR>
@@ -222,8 +225,10 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
-" Ack shortcut
-nnoremap <C-F> :Ack<space>
+" Searcher shortcut
+"nnoremap <C-F> :Ack<space>
+nmap <leader>f :Ag<space>
+nmap <leader>d :Ag <cword> <cr>
 
 " set list on/off
 nnoremap <C-K> :call SetListOnOff()<cr>
