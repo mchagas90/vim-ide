@@ -231,7 +231,7 @@ nmap <leader>f :Ag<space>
 nmap <leader>d :Ag <cword> <cr>
 
 " set list on/off
-nnoremap <C-K> :call SetListOnOff()<cr>
+nmap <leader>k :call SetListOnOff()<cr>
 function! SetListOnOff()
     if &list
         set nolist
