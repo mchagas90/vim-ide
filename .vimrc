@@ -21,10 +21,6 @@ set hlsearch      " Highlight searches by default.
 set incsearch     " Incrementally search while typing a /regex
 set nowrap        " avoid wrap
 
-" enable nerdtree and tabs
-let g:nerdtree_tabs_open_on_console_startup=1
-map <Leader>n <plug>NERDTreeTabsToggle<CR>
-
 " Softtabs, 2 spaces
 set tabstop=2
 set shiftwidth=2
@@ -42,7 +38,7 @@ set colorcolumn=+1
 set number
 set numberwidth=5
 
-" autocmd vimenter * NERDTree
+autocmd vimenter * NERDTree
 autocmd VimEnter * wincmd p
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
@@ -58,7 +54,7 @@ Plugin 'gmarik/Vundle.vim'
 " My Plugins here:
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
-Plugin 'jistr/vim-nerdtree-tabs'
+"Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'kien/ctrlp.vim'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'airblade/vim-gitgutter'
@@ -68,6 +64,7 @@ Plugin 'joshdick/onedark.vim'
 Plugin 'joshdick/airline-onedark.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rails'
+Plugin 'terryma/vim-multiple-cursors'
 
 " completition / snippets
 Plugin 'ervandew/supertab'
@@ -76,15 +73,23 @@ Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
 
+" File search
 "Plugin 'mileszs/ack.vim'
 Plugin 'rking/ag.vim'
+
 " buffers as tabs
 "Plugin 'ap/vim-buftabline'
 
 call vundle#end()
 """"
 
+"Ag config
 let g:ag_working_path_mode="r"
+
+" enable nerdtree and tabs
+"let g:nerdtree_tabs_open_on_console_startup=1
+map <Leader>n :NERDTreeToggle<CR>
+
 
 " change between buffer tabs
 nnoremap <C-O> :bnext<CR>
@@ -128,8 +133,8 @@ let g:airline_symbols.space = "\ua0"
 "let g:airline_symbols.linenr = '¶'
 "let g:airline_symbols.branch = '⎇'
 let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.paste = '∥'
+"let g:airline_symbols.paste = 'Þ'
+"let g:airline_symbols.paste = '∥'
 let g:airline_symbols.spell = 'Ꞩ'
 let g:airline_symbols.notexists = '∄'
 let g:airline_symbols.whitespace = 'Ξ'
@@ -240,14 +245,16 @@ function! SetListOnOff()
     endif
 endfunction
 
+
+
 " configure syntastic syntax checking to check on open as well as save
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 "let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 1
 let g:syntastic_html_checkers=['']
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 let g:syntastic_eruby_ruby_quiet_messages =
