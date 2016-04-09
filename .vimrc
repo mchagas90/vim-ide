@@ -1,3 +1,40 @@
+""" VUNDLE
+set rtp+=~/.vim/bundle/Vundle.vim/
+call vundle#begin()
+
+Plugin 'gmarik/Vundle.vim'
+
+" My Plugins here:
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+"Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'kien/ctrlp.vim'
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'joshdick/onedark.vim'
+Plugin 'joshdick/airline-onedark.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rails'
+Plugin 'terryma/vim-multiple-cursors'
+
+" completition / snippets
+Plugin 'ervandew/supertab'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'honza/vim-snippets'
+
+" File search
+"Plugin 'mileszs/ack.vim'
+Plugin 'rking/ag.vim'
+
+" buffers as tabs
+"Plugin 'ap/vim-buftabline'
+
+call vundle#end()
+""""
 " Leader
 let mapleader = " "
 
@@ -45,55 +82,12 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 " Switch syntax highlighting on, when the terminal has colors
 syntax on
 
-""" VUNDLE
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#begin()
-
-Plugin 'gmarik/Vundle.vim'
-
-" My Plugins here:
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
-"Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'kien/ctrlp.vim'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'joshdick/onedark.vim'
-Plugin 'joshdick/airline-onedark.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-rails'
-Plugin 'terryma/vim-multiple-cursors'
-
-" completition / snippets
-Plugin 'ervandew/supertab'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
-Plugin 'honza/vim-snippets'
-
-" File search
-"Plugin 'mileszs/ack.vim'
-Plugin 'rking/ag.vim'
-
-" buffers as tabs
-"Plugin 'ap/vim-buftabline'
-
-call vundle#end()
-""""
-
 "Ag config
 let g:ag_working_path_mode="r"
 
 " enable nerdtree and tabs
 "let g:nerdtree_tabs_open_on_console_startup=1
 map <Leader>n :NERDTreeToggle<CR>
-
-
-" change between buffer tabs
-nnoremap <C-O> :bnext<CR>
-nnoremap <C-I> :bprev<CR>
 
 colorscheme onedark
 " uncomment if your terminal does not support 256 colors
@@ -159,16 +153,15 @@ let g:snipMate.scope_aliases['ruby'] = 'ruby,rails'
 set hidden
 
 " To open a new empty buffer
-nmap <leader>T :enew<cr>
+nmap <leader>t :enew<cr>
 
 " This replicates the idea of closing a tab
 nmap <leader>bq :bp <BAR> bd #<CR>
 
-" Move to the next buffer
-"nmap <leader>l :bnext<CR>
-" Move to the previous buffer
-"nmap <leader>h :bprevious<CR>
-" Close the current buffer and move to the previous one
+" change between buffer tabs
+nnoremap <C-O> :bnext<CR>
+nnoremap <C-I> :bprev<CR>
+
 " Show all open buffers and their status
 "nmap <leader>bl :ls<CR>
 
@@ -244,8 +237,6 @@ function! SetListOnOff()
         set list!
     endif
 endfunction
-
-
 
 " configure syntastic syntax checking to check on open as well as save
 set statusline+=%#warningmsg#
