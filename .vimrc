@@ -101,6 +101,10 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
 " unicode symbols
 "let g:airline_symbols.space = "\ua0"
 "let g:airline_left_sep = '»'
@@ -217,7 +221,7 @@ let g:ag_working_path_mode="r"
 "open searcher
 nnoremap <leader>f :Ag<space>
 nnoremap <leader>d :Ag <cword> <cr>
-" search visual selection in all files                                           
+" search visual selection in all files
 vnoremap <Leader>d y:Ag <C-r>=fnameescape(@")<CR><CR>
 "search for text selected
 vnoremap // y/<C-R>"<CR>
