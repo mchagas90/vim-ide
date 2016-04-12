@@ -217,7 +217,8 @@ let g:ag_working_path_mode="r"
 "open searcher
 nnoremap <leader>f :Ag<space>
 nnoremap <leader>d :Ag <cword> <cr>
-
+" search visual selection in all files                                           
+vnoremap <Leader>d y:Ag <C-r>=fnameescape(@")<CR><CR>
 "search for text selected
 vnoremap // y/<C-R>"<CR>
 
