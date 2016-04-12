@@ -27,21 +27,18 @@ Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
 
 " File search
-"Plugin 'mileszs/ack.vim'
+Plugin 'mileszs/ack.vim'
 Plugin 'rking/ag.vim'
-
-" buffers as tabs
-"Plugin 'ap/vim-buftabline'
 
 call vundle#end()
 """"
+
 " Leader
 let mapleader = " "
 
 set backspace=2   " Backspace deletes like most programs in insert mode
 set ruler         " show the cursor position all the time
 set showcmd       " display incomplete commands
-set incsearch     " do incremental searching
 set laststatus=2  " Always display the status line
 set autowrite     " Automatically :write before running commands
 "set cursorline    " highlight current line
@@ -52,7 +49,6 @@ set mouse=a       " enable mouse
 set vb t_vb=      " disable all bells.
 set confirm       " Y-N-C prompt if closing with unsaved changes.
 set showcmd       " show incomplete normal mode commands as I type.
-"set smartcase     " unless uppercase letters are used in the regex.
 set smarttab      " Handle tabs more intelligently
 set hlsearch      " Highlight searches by default.
 set incsearch     " Incrementally search while typing a /regex
@@ -79,44 +75,34 @@ autocmd vimenter * NERDTree
 autocmd VimEnter * wincmd p
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" Switch syntax highlighting on, when the terminal has colors
+" Switch syntax on
 syntax on
-
-"Ag config
-let g:ag_working_path_mode="r"
 
 " enable nerdtree and tabs
 "let g:nerdtree_tabs_open_on_console_startup=1
 map <Leader>n :NERDTreeToggle<CR>
 
 colorscheme onedark
+set t_Co=256
 " uncomment if your terminal does not support 256 colors
 " let g:onedark_termcolors=16
-
-" airline configs
-" set guifont=Liberation\ Mono\ for\ Powerline\ 10
-" set encoding=utf-8
-" set fillchars+=stl:\ ,stlnc:\
-" set term=xterm-256color
-" set termencoding=utf-8
-set t_Co=256
 
 " custom coble the list of buffers
 let g:airline#extensions#tabline#enabled = 1
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
-
+"shoe git add/mod/del
 let g:airline#extensions#hunks#enabled=1
+
 let g:airline_theme='onedark'
 let g:airline_powerline_fonts = 1
 
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-
-let g:airline_symbols.space = "\ua0"
+" change buffer separator
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
 
 " unicode symbols
+"let g:airline_symbols.space = "\ua0"
 "let g:airline_left_sep = '»'
 "let g:airline_left_sep = '▶'
 "let g:airline_right_sep = '«'
@@ -126,21 +112,20 @@ let g:airline_symbols.space = "\ua0"
 "let g:airline_symbols.linenr = '␤'
 "let g:airline_symbols.linenr = '¶'
 "let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
+"let g:airline_symbols.paste = 'ρ'
 "let g:airline_symbols.paste = 'Þ'
 "let g:airline_symbols.paste = '∥'
-let g:airline_symbols.spell = 'Ꞩ'
-let g:airline_symbols.notexists = '∄'
-let g:airline_symbols.whitespace = 'Ξ'
-
+"let g:airline_symbols.spell = 'Ꞩ'
+"let g:airline_symbols.notexists = '∄'
+"let g:airline_symbols.whitespace = 'Ξ'
 " powerline symbols
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
+"let g:airline_left_sep = ''
+"let g:airline_left_alt_sep = ''
+"let g:airline_right_sep = ''
+"let g:airline_right_alt_sep = ''
+"let g:airline_symbols.branch = ''
+"let g:airline_symbols.readonly = ''
+"let g:airline_symbols.linenr = ''
 
 " snipmate configs
 let g:snipMate = {}
@@ -223,10 +208,18 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
-" Searcher shortcut
+"Searching tools configs
+
+"Ag config
+let g:ag_working_path_mode="r"
+
 "nnoremap <C-F> :Ack<space>
-nmap <leader>f :Ag<space>
-nmap <leader>d :Ag <cword> <cr>
+"open searcher
+nnoremap <leader>f :Ag<space>
+nnoremap <leader>d :Ag <cword> <cr>
+
+"search for text selected
+vnoremap // y/<C-R>"<CR>
 
 " set list on/off
 nmap <leader>k :call SetListOnOff()<cr>
