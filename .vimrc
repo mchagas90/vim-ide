@@ -219,10 +219,9 @@ let g:ag_working_path_mode="r"
 
 "nnoremap <C-F> :Ack<space>
 "open searcher
-nnoremap <leader>f :Ag<space>
-nnoremap <leader>d :Ag <cword> <cr>
+nnoremap <leader>f :Ag!<space>
 " search visual selection in all files
-vnoremap <Leader>d y:Ag <C-r>=fnameescape(@")<CR><CR>
+vnoremap <leader>d y:Ag! <C-r>=fnameescape(@")<CR><CR>
 "search for text selected
 vnoremap // y/<C-R>"<CR>
 
