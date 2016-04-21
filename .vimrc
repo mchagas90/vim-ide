@@ -7,7 +7,6 @@ Plugin 'gmarik/Vundle.vim'
 " My Plugins here:
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
-"Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'kien/ctrlp.vim'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'airblade/vim-gitgutter'
@@ -18,6 +17,7 @@ Plugin 'joshdick/airline-onedark.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rails'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'tpope/vim-commentary'
 
 " completition / snippets
 Plugin 'ervandew/supertab'
@@ -48,7 +48,6 @@ set bg=dark       " dark terminal
 set mouse=a       " enable mouse
 set vb t_vb=      " disable all bells.
 set confirm       " Y-N-C prompt if closing with unsaved changes.
-set showcmd       " show incomplete normal mode commands as I type.
 set smarttab      " Handle tabs more intelligently
 set hlsearch      " Highlight searches by default.
 set incsearch     " Incrementally search while typing a /regex
@@ -61,7 +60,7 @@ set shiftround
 set expandtab
 
 " Display extra whitespace
-set list listchars=tab:»·,trail:·,nbsp:·,space:·
+set listchars=tab:»·,trail:·,nbsp:·,space:·
 
 " Make it obvious where 80 characters is
 set textwidth=80
@@ -79,7 +78,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 syntax on
 
 " enable nerdtree and tabs
-"let g:nerdtree_tabs_open_on_console_startup=1
 map <Leader>n :NERDTreeToggle<CR>
 
 colorscheme onedark
@@ -91,7 +89,7 @@ set t_Co=256
 let g:airline#extensions#tabline#enabled = 1
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
-"shoe git add/mod/del
+"show git add/edit/delet
 let g:airline#extensions#hunks#enabled=1
 
 let g:airline_theme='onedark'
@@ -115,7 +113,7 @@ endif
 "let g:airline_symbols.linenr = '␊'
 "let g:airline_symbols.linenr = '␤'
 "let g:airline_symbols.linenr = '¶'
-"let g:airline_symbols.branch = '⎇'
+"let g:airline_symbols.branch = '⎇ '
 "let g:airline_symbols.paste = 'ρ'
 "let g:airline_symbols.paste = 'Þ'
 "let g:airline_symbols.paste = '∥'
@@ -151,9 +149,6 @@ nmap <leader>bq :bp <BAR> bd #<CR>
 nnoremap <C-O> :bnext<CR>
 nnoremap <C-I> :bprev<CR>
 
-" Show all open buffers and their status
-"nmap <leader>bl :ls<CR>
-
 filetype plugin indent on
 
 augroup vimrcEx
@@ -181,23 +176,7 @@ augroup vimrcEx
   autocmd FileType gitcommit setlocal textwidth=72
   autocmd FileType gitcommit setlocal spell
 
-  " Allow stylesheets to autocomplete hyphenated words
-  "autocmd FileType css,scss,sass setlocal iskeyword+=-
 augroup END
-
-
-" Tab completion
-" will insert tab at beginning of line,
-" will use completion if not at beginning
-set wildmode=list:longest,list:full
-function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
-endfunction
 
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
@@ -251,7 +230,3 @@ let g:syntastic_eruby_ruby_quiet_messages =
 " Always use vertical diffs
 set diffopt+=vertical
 
-" Local config
-if filereadable($HOME . "/.vimrc.local")
-  source ~/.vimrc.local
-endif
