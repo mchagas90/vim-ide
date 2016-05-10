@@ -30,6 +30,8 @@ Plugin 'honza/vim-snippets'
 Plugin 'mileszs/ack.vim'
 Plugin 'rking/ag.vim'
 
+Plugin 'tpope/vim-commentary'
+
 call vundle#end()
 """"
 
@@ -42,7 +44,7 @@ set showcmd       " display incomplete commands
 set laststatus=2  " Always display the status line
 set autowrite     " Automatically :write before running commands
 "set cursorline    " highlight current line
-"set cursorcolumn  " highlight column
+set cursorcolumn  " highlight column
 set ic            " search case insensitive
 set bg=dark       " dark terminal
 set mouse=a       " enable mouse
@@ -195,6 +197,15 @@ nnoremap <C-l> <C-w>l
 
 "Ag config
 let g:ag_working_path_mode="r"
+
+let g:ag_highlight=1                                                                                 
+let g:ag_prg='ag --column --nogroup --noheading'                                                     
+
+let g:ignore_dirs = "log/ coverage/"
+
+if exists("g:ignore_dirs")
+  let g:ag_prg.=" --ignore ".join(split(g:ignore_dirs), " --ignore ")
+endif
 
 "nnoremap <C-F> :Ack<space>
 "open searcher
