@@ -30,8 +30,6 @@ Plugin 'honza/vim-snippets'
 Plugin 'mileszs/ack.vim'
 Plugin 'rking/ag.vim'
 
-Plugin 'tpope/vim-commentary'
-
 call vundle#end()
 """"
 
@@ -62,7 +60,8 @@ set shiftround
 set expandtab
 
 " Display extra whitespace
-set listchars=tab:»·,trail:·,nbsp:·,space:·
+set listchars=tab:»·,trail:·,nbsp:·
+" ,space:·
 
 " Make it obvious where 80 characters is
 set textwidth=80
