@@ -3,9 +3,9 @@ rm -rf ~/vim-ide
 
 #install dependencies
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    sudo apt-get install silversearcher-ag exuberant-ctags vim vim-nox -y
+    sudo apt-get install git silversearcher-ag exuberant-ctags vim vim-nox -y
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-    brew install the_silver_searcher ctags-exuberant vim --with-lua --override-system-vi
+    brew install the_silver_searcher ctags-exuberant git vim --with-lua --override-system-vi
 fi
 
 git clone https://github.com/mchagas90/vim-ide.git ~/vim-ide
