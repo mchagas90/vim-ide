@@ -34,6 +34,12 @@ Plugin 'vim-ruby/vim-ruby'
 
 call vundle#end()
 """"
+" avoid typos when executing commands
+cab Q q
+cab W w
+cab Wq wq
+cab wQ wq
+cab WQ wq
 
 " Leader
 let mapleader = " "
