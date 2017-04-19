@@ -38,9 +38,9 @@ let mapleader = " "
 
 set backspace=2   " Backspace deletes like most programs in insert mode
 set ruler         " show the cursor position all the time
-set showcmd       " display incomplete commands
+" set showcmd       " display incomplete commands
 set laststatus=2  " Always display the status line
-set autowrite     " Automatically :write before running commands
+" set autowrite     " Automatically :write before running commands
 "set cursorline    " highlight current line
 set cursorcolumn  " highlight column
 set ic            " search case insensitive
@@ -60,8 +60,7 @@ set shiftround
 set expandtab
 
 " Display extra whitespace
-set listchars=tab:»·,trail:·,nbsp:·
-" ,space:·
+set listchars=tab:»·,trail:·,nbsp:·,space:·
 
 " Make it obvious where 80 characters is
 set textwidth=80
@@ -71,15 +70,16 @@ set colorcolumn=+1
 set number
 set numberwidth=5
 
+" NERDTree configs
 autocmd vimenter * NERDTree
 autocmd VimEnter * wincmd p
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" Switch syntax on
-syntax on
-
 " enable nerdtree and tabs
 map <Leader>n :NERDTreeToggle<CR>
+
+" Switch syntax on
+syntax on
 
 colorscheme onedark
 set t_Co=256
@@ -197,8 +197,8 @@ nnoremap <C-l> <C-w>l
 "Ag config
 let g:ag_working_path_mode="r"
 
-let g:ag_highlight=1                                                                                 
-let g:ag_prg='ag --column --nogroup --noheading'                                                     
+let g:ag_highlight=1
+let g:ag_prg='ag --column --nogroup --noheading'
 
 let g:ignore_dirs = "log/ coverage/"
 
