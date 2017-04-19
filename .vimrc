@@ -30,6 +30,8 @@ Plugin 'honza/vim-snippets'
 Plugin 'mileszs/ack.vim'
 Plugin 'rking/ag.vim'
 
+Plugin 'vim-ruby/vim-ruby'
+
 call vundle#end()
 """"
 
