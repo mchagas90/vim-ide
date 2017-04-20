@@ -27,7 +27,7 @@ Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
 
 " File search
-Plugin 'mileszs/ack.vim'
+" Plugin 'mileszs/ack.vim'
 Plugin 'rking/ag.vim'
 
 Plugin 'vim-ruby/vim-ruby'
@@ -46,9 +46,9 @@ let mapleader = " "
 
 set backspace=2   " Backspace deletes like most programs in insert mode
 set ruler         " show the cursor position all the time
-" set showcmd       " display incomplete commands
+set showcmd       " display incomplete commands
 set laststatus=2  " Always display the status line
-" set autowrite     " Automatically :write before running commands
+set autowrite     " Automatically :write before running commands
 "set cursorline    " highlight current line
 set cursorcolumn  " highlight column
 set ic            " search case insensitive
@@ -68,7 +68,8 @@ set shiftround
 set expandtab
 
 " Display extra whitespace
-set listchars=tab:»·,trail:·,nbsp:·,space:·
+set listchars=tab:»·,trail:·,nbsp:·
+" ,space:·
 
 " Make it obvious where 80 characters is
 set textwidth=80
