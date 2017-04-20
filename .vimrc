@@ -6,6 +6,8 @@ Plugin 'gmarik/Vundle.vim'
 
 " My Plugins here:
 Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+
 Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'
 Plugin 'editorconfig/editorconfig-vim'
@@ -15,9 +17,11 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'joshdick/onedark.vim'
 Plugin 'joshdick/airline-onedark.vim'
 Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-rails'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tpope/vim-commentary'
+
+Plugin 'tpope/vim-rails'
+Plugin 'vim-ruby/vim-ruby'
 
 " completition / snippets
 Plugin 'ervandew/supertab'
@@ -29,8 +33,6 @@ Plugin 'honza/vim-snippets'
 " File search
 " Plugin 'mileszs/ack.vim'
 Plugin 'rking/ag.vim'
-
-Plugin 'vim-ruby/vim-ruby'
 
 call vundle#end()
 """"
@@ -68,8 +70,7 @@ set shiftround
 set expandtab
 
 " Display extra whitespace
-set listchars=tab:»·,trail:·,nbsp:·
-" ,space:·
+set listchars=tab:»·,trail:·,nbsp:·,space:·
 
 " Make it obvious where 80 characters is
 set textwidth=80
@@ -151,14 +152,16 @@ let g:snipMate.scope_aliases['ruby'] = 'ruby,rails'
 set hidden
 
 " To open a new empty buffer
-nmap <leader>t :enew<cr>
-
+nnoremap <leader>t :enew<cr>
 " This replicates the idea of closing a tab
-nmap <leader>bq :bp <BAR> bd #<CR>
+nnoremap <leader>bq :bp <BAR> bd #<CR>
 
 " change between buffer tabs
-nnoremap <C-O> :bnext<CR>
-nnoremap <C-I> :bprev<CR>
+nnoremap <leader>o :bnext<CR>
+nnoremap <leader>i :bprev<CR>
+
+" Avoid ctrl-i ctrl-o going to nerdtree
+let g:netrw_altfile = 1
 
 filetype plugin indent on
 
@@ -225,7 +228,7 @@ vnoremap <leader>d y:Ag! <C-r>=fnameescape(@")<CR><CR>
 vnoremap // y/<C-R>"<CR>
 
 " set list on/off
-nmap <leader>k :call SetListOnOff()<cr>
+nnoremap <leader>k :call SetListOnOff()<cr>
 function! SetListOnOff()
     if &list
         set nolist
