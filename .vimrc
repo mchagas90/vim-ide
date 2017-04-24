@@ -46,7 +46,8 @@ cab WQ wq
 
 " avoid the extra 'shift' keypress when typing the colon to go to cmdline mode
 map ; :
-inoremap jj <ESC>l
+" press semicolon twice in insert mode to go to normal mode
+inoremap ;; <ESC>l
 
 " Leader
 let mapleader = " "
@@ -68,18 +69,24 @@ set incsearch     " Incrementally search while typing a /regex
 set nowrap        " avoid wrap
 "set cursorline    " highlight current line
 
-" Softtabs, 2 spaces
-set tabstop=2
-set shiftwidth=2
 set shiftround
 set expandtab
+set softtabstop=-1 " Make 'softtabstop' follow 'shiftwidth'
+set shiftwidth=0     " Make 'shiftwidth' follow 'tabstop'
 
-" convert spaces to tabs when reading file
-autocmd! bufreadpost * set noexpandtab | retab! 2
-" convert tabs to spaces before writing file
-autocmd! bufwritepre * set expandtab | retab! 2
-" convert spaces to tabs after writing file (to show guides again)
-autocmd! bufwritepost * set noexpandtab | retab! 2
+" Softtabs, 2 spaces
+function! SetTabSize(size)
+    let tabsize=a:size
+    let &tabstop=tabsize " Assign 'tabstop' a value of local tabsize variable
+    " convert spaces to tabs when reading file
+    autocmd! bufreadpost * set noexpandtab | retab! tabsize
+    " convert tabs to spaces before writing file
+    autocmd! bufwritepre * set expandtab | retab! tabsize
+    " convert spaces to tabs after writing file (to show guides again)
+    autocmd! bufwritepost * set noexpandtab | retab! tabsize
+endfunction
+command! -nargs=1 SetTabSize call SetTabSize(<f-args>)
+call SetTabSize(2)
 
 " Display extra whitespace
 set list
