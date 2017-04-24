@@ -46,6 +46,7 @@ cab WQ wq
 
 " avoid the extra 'shift' keypress when typing the colon to go to cmdline mode
 map ; :
+inoremap jj <ESC>l
 
 " Leader
 let mapleader = " "
@@ -55,7 +56,6 @@ set ruler         " show the cursor position all the time
 set showcmd       " display incomplete commands
 set laststatus=2  " Always display the status line
 set autowrite     " Automatically :write before running commands
-"set cursorline    " highlight current line
 set cursorcolumn  " highlight column
 set ic            " search case insensitive
 set bg=dark       " dark terminal
@@ -66,6 +66,7 @@ set smarttab      " Handle tabs more intelligently
 set hlsearch      " Highlight searches by default.
 set incsearch     " Incrementally search while typing a /regex
 set nowrap        " avoid wrap
+"set cursorline    " highlight current line
 
 " Softtabs, 2 spaces
 set tabstop=2
@@ -73,12 +74,19 @@ set shiftwidth=2
 set shiftround
 set expandtab
 
+" convert spaces to tabs when reading file
+autocmd! bufreadpost * set noexpandtab | retab! 2
+" convert tabs to spaces before writing file
+autocmd! bufwritepre * set expandtab | retab! 2
+" convert spaces to tabs after writing file (to show guides again)
+autocmd! bufwritepost * set noexpandtab | retab! 2
+
 " Display extra whitespace
 set list
 if has("patch-7.4.710")
-    set listchars=tab:»·,trail:·,nbsp:·,space:·
+    set listchars=tab:\|\·,trail:·,nbsp:·,space:·
 else
-    set listchars=tab:»·,trail:·,nbsp:·
+    set listchars=tab:\|\·,trail:·,nbsp:·
 endif
 
 " Make it obvious where 80 characters is
