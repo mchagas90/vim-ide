@@ -37,11 +37,15 @@ Plugin 'rking/ag.vim'
 call vundle#end()
 """"
 " avoid typos when executing commands
+cab Q! q!
 cab Q q
 cab W w
 cab Wq wq
 cab wQ wq
 cab WQ wq
+
+" avoid the extra 'shift' keypress when typing the colon to go to cmdline mode
+map ; :
 
 " Leader
 let mapleader = " "
@@ -70,7 +74,12 @@ set shiftround
 set expandtab
 
 " Display extra whitespace
-set listchars=tab:»·,trail:·,nbsp:·,space:·
+set list
+if has("patch-7.4.710")
+    set listchars=tab:»·,trail:·,nbsp:·,space:·
+else
+    set listchars=tab:»·,trail:·,nbsp:·
+endif
 
 " Make it obvious where 80 characters is
 set textwidth=80
@@ -150,15 +159,13 @@ let g:snipMate.scope_aliases['ruby'] = 'ruby,rails'
 " This allows buffers to be hidden if you've modified a buffer.
 " This is almost a must if you wish to use buffers in this way.
 set hidden
-
 " To open a new empty buffer
 nnoremap <leader>t :enew<cr>
 " This replicates the idea of closing a tab
 nnoremap <leader>bq :bp <BAR> bd #<CR>
-
 " change between buffer tabs
-nnoremap <leader>o :bnext<CR>
-nnoremap <leader>i :bprev<CR>
+nnoremap <leader><right> :bnext<CR>
+nnoremap <leader><left> :bprev<CR>
 
 " Avoid ctrl-i ctrl-o going to nerdtree
 let g:netrw_altfile = 1
@@ -205,6 +212,12 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
+" clean highlighted search
+nnoremap ,/ :nohlsearch<CR>
+
+" copy selection to clipboard
+vnoremap <leader>y "*y<CR>
+
 "Searching tools configs
 
 "Ag config
@@ -228,14 +241,7 @@ vnoremap <leader>d y:Ag! <C-r>=fnameescape(@")<CR><CR>
 vnoremap // y/<C-R>"<CR>
 
 " set list on/off
-nnoremap <leader>k :call SetListOnOff()<cr>
-function! SetListOnOff()
-    if &list
-        set nolist
-    else
-        set list!
-    endif
-endfunction
+nnoremap <leader>k :set list!<CR>
 
 " configure syntastic syntax checking to check on open as well as save
 set statusline+=%#warningmsg#
