@@ -79,14 +79,29 @@ function! SetTabSize(size)
     let tabsize=a:size
     let &tabstop=tabsize " Assign 'tabstop' a value of local tabsize variable
     " convert spaces to tabs when reading file
-    autocmd! bufreadpost * set noexpandtab | retab! tabsize
-    " convert tabs to spaces before writing file
-    autocmd! bufwritepre * set expandtab | retab! tabsize
-    " convert spaces to tabs after writing file (to show guides again)
-    autocmd! bufwritepost * set noexpandtab | retab! tabsize
+    " autocmd! bufreadpost * set noexpandtab | retab! tabsize
+    " " convert tabs to spaces before writing file
+    " autocmd! bufwritepre * set expandtab | retab! tabsize
+    " " convert spaces to tabs after writing file (to show guides again)
+    " autocmd! bufwritepost * set noexpandtab | retab! tabsize
 endfunction
 command! -nargs=1 SetTabSize call SetTabSize(<f-args>)
 call SetTabSize(2)
+
+" returns true if is NERDTree open/active
+function! rc:isNTOpen()
+    return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+endfunction
+
+" calls NERDTreeFind if NERDTree is active, current window contains a modifiable file, and we're not in vimdiff
+function! rc:syncTree()
+    if &modifiable && rc:isNTOpen() && strlen(expand('%')) > 0 && !&diff
+      NERDTreeFind
+      wincmd p
+    endif
+endfunction
+
+autocmd BufEnter * call rc:syncTree()
 
 " Display extra whitespace
 set list
@@ -96,8 +111,8 @@ else
     set listchars=tab:\|\·,trail:·,nbsp:·
 endif
 
-" Make it obvious where 80 characters is
-set textwidth=80
+" Make it obvious where 99 characters is
+set textwidth=99
 set colorcolumn=+1
 
 " Numbers
