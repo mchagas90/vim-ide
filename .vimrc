@@ -89,19 +89,19 @@ command! -nargs=1 SetTabSize call SetTabSize(<f-args>)
 call SetTabSize(2)
 
 " returns true if is NERDTree open/active
-function! rc:isNTOpen()
+function! IsNTOpen()
     return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
 endfunction
 
 " calls NERDTreeFind if NERDTree is active, current window contains a modifiable file, and we're not in vimdiff
-function! rc:syncTree()
-    if &modifiable && rc:isNTOpen() && strlen(expand('%')) > 0 && !&diff
+function! SyncTree()
+    if &modifiable && IsNTOpen() && strlen(expand('%')) > 0 && !&diff
       NERDTreeFind
       wincmd p
     endif
 endfunction
 
-autocmd BufEnter * call rc:syncTree()
+autocmd BufEnter * call SyncTree()
 
 " Display extra whitespace
 set list
