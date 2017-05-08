@@ -34,6 +34,7 @@ Plugin 'honza/vim-snippets'
 " Plugin 'mileszs/ack.vim'
 Plugin 'rking/ag.vim'
 
+Plugin 'fholgado/minibufexpl.vim'
 call vundle#end()
 """"
 " avoid typos when executing commands
@@ -98,10 +99,11 @@ function! SyncTree()
     if &modifiable && IsNTOpen() && strlen(expand('%')) > 0 && !&diff
       NERDTreeFind
       wincmd p
+      normal zz
     endif
 endfunction
 
-autocmd BufEnter * call SyncTree()
+" autocmd BufEnter * call SyncTree()
 
 " Display extra whitespace
 set list
@@ -137,9 +139,9 @@ set t_Co=256
 " let g:onedark_termcolors=16
 
 " custom coble the list of buffers
-let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#enabled = 1
 " Show just the filename
-let g:airline#extensions#tabline#fnamemod = ':t'
+" let g:airline#extensions#tabline#fnamemod = ':t'
 "show git add/edit/delet
 let g:airline#extensions#hunks#enabled=1
 
@@ -147,8 +149,8 @@ let g:airline_theme='onedark'
 let g:airline_powerline_fonts = 1
 
 " change buffer separator
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
+" let g:airline#extensions#tabline#left_sep = ' '
+" let g:airline#extensions#tabline#left_alt_sep = '|'
 
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
@@ -197,6 +199,9 @@ nnoremap <leader>bq :bp <BAR> bd #<CR>
 nnoremap <leader><right> :bnext<CR>
 nnoremap <leader><left> :bprev<CR>
 
+" always show minibuffer explorer
+let g:miniBufExplBuffersNeeded = 0
+
 " Avoid ctrl-i ctrl-o going to nerdtree
 let g:netrw_altfile = 1
 
@@ -233,8 +238,8 @@ augroup END
 let g:html_indent_tags = 'li\|p'
 
 " Open new split panes to right and bottom, which feels more natural
-set splitbelow
-set splitright
+" set splitbelow
+" set splitright
 
 " Quicker window movement
 nnoremap <C-j> <C-w>j
