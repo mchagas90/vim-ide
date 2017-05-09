@@ -196,8 +196,8 @@ nnoremap <leader>t :enew<cr>
 " This replicates the idea of closing a tab
 nnoremap <leader>bq :bp <BAR> bd #<CR>
 " change between buffer tabs
-nnoremap <leader><right> :bnext<CR>
-nnoremap <leader><left> :bprev<CR>
+nnoremap <C-Right> :bnext<CR>
+nnoremap <C-Left> :bprev<CR>
 
 " always show minibuffer explorer
 let g:miniBufExplBuffersNeeded = 0
@@ -242,10 +242,14 @@ let g:html_indent_tags = 'li\|p'
 " set splitright
 
 " Quicker window movement
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
+" nnoremap <C-j> <C-w>j
+" nnoremap <C-k> <C-w>k
+" nnoremap <C-h> <C-w>h
+" nnoremap <C-l> <C-w>l
+nnoremap <silent> <A-Up> :wincmd k<CR>
+nnoremap <silent> <A-Down> :wincmd j<CR>
+nnoremap <silent> <A-Left> :wincmd h<CR>
+nnoremap <silent> <A-Right> :wincmd l<CR>
 
 " clean highlighted search
 nnoremap ,/ :nohlsearch<CR>
