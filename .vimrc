@@ -4,10 +4,9 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 
-" My Plugins here:
+" Plugins session:
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
-
 Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'
 Plugin 'editorconfig/editorconfig-vim'
@@ -15,11 +14,11 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'joshdick/onedark.vim'
-Plugin 'joshdick/airline-onedark.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tpope/vim-commentary'
 
+" ruby/rails plugins
 Plugin 'tpope/vim-rails'
 Plugin 'vim-ruby/vim-ruby'
 
@@ -31,10 +30,8 @@ Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
 
 " File search
-" Plugin 'mileszs/ack.vim'
 Plugin 'rking/ag.vim'
 
-Plugin 'fholgado/minibufexpl.vim'
 call vundle#end()
 """"
 " avoid typos when executing commands
@@ -68,12 +65,12 @@ set smarttab      " Handle tabs more intelligently
 set hlsearch      " Highlight searches by default.
 set incsearch     " Incrementally search while typing a /regex
 set nowrap        " avoid wrap
-"set cursorline    " highlight current line
+" set cursorline    " highlight current line
 
 set shiftround
 set expandtab
 set softtabstop=-1 " Make 'softtabstop' follow 'shiftwidth'
-set shiftwidth=0     " Make 'shiftwidth' follow 'tabstop'
+set shiftwidth=0   " Make 'shiftwidth' follow 'tabstop'
 
 " Softtabs, 2 spaces
 function! SetTabSize(size)
@@ -127,6 +124,10 @@ autocmd vimenter * NERDTree
 autocmd VimEnter * wincmd p
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
+" avoid buffer changes when nerdtree focused
+autocmd FileType nerdtree nnoremap <buffer> <tab> <nop>
+autocmd FileType nerdtree nnoremap <buffer> <s-tab> <nop>
+
 " enable nerdtree and tabs
 map <Leader>n :NERDTreeToggle<CR>
 
@@ -139,18 +140,18 @@ set t_Co=256
 " let g:onedark_termcolors=16
 
 " custom coble the list of buffers
-" let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
 " Show just the filename
-" let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#fnamemod = ':t'
 "show git add/edit/delet
-let g:airline#extensions#hunks#enabled=1
+let g:airline#extensions#hunks#enabled = 1
 
 let g:airline_theme='onedark'
 let g:airline_powerline_fonts = 1
 
 " change buffer separator
-" let g:airline#extensions#tabline#left_sep = ' '
-" let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
 
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
@@ -196,11 +197,11 @@ nnoremap <leader>t :enew<cr>
 " This replicates the idea of closing a tab
 nnoremap <leader>bq :bp <BAR> bd #<CR>
 " change between buffer tabs
-nnoremap <C-Right> :bnext<CR>
-nnoremap <C-Left> :bprev<CR>
+nnoremap <tab> :bnext<CR>
+nnoremap <s-tab> :bprev<CR>
 
 " always show minibuffer explorer
-let g:miniBufExplBuffersNeeded = 0
+" let g:miniBufExplBuffersNeeded = 0
 
 " Avoid ctrl-i ctrl-o going to nerdtree
 let g:netrw_altfile = 1
@@ -242,14 +243,14 @@ let g:html_indent_tags = 'li\|p'
 " set splitright
 
 " Quicker window movement
-" nnoremap <C-j> <C-w>j
-" nnoremap <C-k> <C-w>k
-" nnoremap <C-h> <C-w>h
-" nnoremap <C-l> <C-w>l
-nnoremap <silent> <A-Up> :wincmd k<CR>
-nnoremap <silent> <A-Down> :wincmd j<CR>
-nnoremap <silent> <A-Left> :wincmd h<CR>
-nnoremap <silent> <A-Right> :wincmd l<CR>
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+" nnoremap <silent> <A-Up> :wincmd k<CR>
+" nnoremap <silent> <A-Down> :wincmd j<CR>
+" nnoremap <silent> <A-Left> :wincmd h<CR>
+" nnoremap <silent> <A-Right> :wincmd l<CR>
 
 " clean highlighted search
 nnoremap ,/ :nohlsearch<CR>
