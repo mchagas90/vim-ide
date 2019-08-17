@@ -21,6 +21,7 @@ Plugin 'tpope/vim-commentary'
 " ruby/rails plugins
 Plugin 'tpope/vim-rails'
 Plugin 'vim-ruby/vim-ruby'
+Plugin 'tpope/vim-bundler'
 
 " completition / snippets
 Plugin 'ervandew/supertab'
@@ -50,22 +51,23 @@ inoremap ;; <ESC>l
 " Leader
 let mapleader = " "
 
-set backspace=2   " Backspace deletes like most programs in insert mode
-set ruler         " show the cursor position all the time
-set showcmd       " display incomplete commands
-set laststatus=2  " Always display the status line
-set autowrite     " Automatically :write before running commands
-set cursorcolumn  " highlight column
-set ic            " search case insensitive
-set bg=dark       " dark terminal
-set mouse=a       " enable mouse
-set vb t_vb=      " disable all bells.
-set confirm       " Y-N-C prompt if closing with unsaved changes.
-set smarttab      " Handle tabs more intelligently
-set hlsearch      " Highlight searches by default.
-set incsearch     " Incrementally search while typing a /regex
-set nowrap        " avoid wrap
-" set cursorline    " highlight current line
+set backspace=2           " Backspace deletes like most programs in insert mode
+set ruler                 " show the cursor position all the time
+set showcmd               " display incomplete commands
+set laststatus=2          " Always display the status line
+set autowrite             " Automatically :write before running commands
+set cursorcolumn          " highlight column
+set ic                    " search case insensitive
+set bg=dark               " dark terminal
+set mouse=a               " enable mouse
+set vb t_vb=              " disable all bells.
+set confirm               " Y-N-C prompt if closing with unsaved changes.
+set smarttab              " Handle tabs more intelligently
+set hlsearch              " Highlight searches by default.
+set incsearch             " Incrementally search while typing a /regex
+set nowrap                " avoid wrap
+" set cursorline          " highlight current line
+set clipboard=unnamedplus " copy selection to clipboard
 
 set shiftround
 set expandtab
@@ -192,6 +194,7 @@ let g:snipMate.scope_aliases['ruby'] = 'ruby,rails'
 " This allows buffers to be hidden if you've modified a buffer.
 " This is almost a must if you wish to use buffers in this way.
 set hidden
+
 " To open a new empty buffer
 nnoremap <leader>t :enew<cr>
 " This replicates the idea of closing a tab
