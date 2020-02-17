@@ -13,7 +13,8 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'joshdick/onedark.vim'
+" Plugin 'joshdick/onedark.vim'
+Plugin 'dracula/vim', { 'name': 'dracula' }
 Plugin 'tpope/vim-fugitive'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tpope/vim-commentary'
@@ -87,18 +88,18 @@ command! -nargs=1 SetTabSize call SetTabSize(<f-args>)
 call SetTabSize(2)
 
 " returns true if is NERDTree open/active
-function! IsNTOpen()
-    return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-endfunction
+" function! IsNTOpen()
+"     return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+" endfunction
 
 " calls NERDTreeFind if NERDTree is active, current window contains a modifiable file, and we're not in vimdiff
-function! SyncTree()
-    if &modifiable && IsNTOpen() && strlen(expand('%')) > 0 && !&diff
-      NERDTreeFind
-      wincmd p
-      normal zz
-    endif
-endfunction
+" function! SyncTree()
+"     if &modifiable && IsNTOpen() && strlen(expand('%')) > 0 && !&diff
+"       NERDTreeFind
+"       wincmd p
+"       normal zz
+"     endif
+" endfunction
 
 " autocmd BufEnter * call SyncTree()
 
@@ -118,7 +119,6 @@ set colorcolumn=+1
 set relativenumber
 set number
 set numberwidth=5
-
 " NERDTree configs
 autocmd vimenter * NERDTree
 autocmd VimEnter * wincmd p
@@ -134,7 +134,8 @@ map <Leader>n :NERDTreeToggle<CR>
 " Switch syntax on
 syntax on
 
-colorscheme onedark
+ colorscheme dracula
+" colorscheme onedark
 set t_Co=256
 " uncomment if your terminal does not support 256 colors
 " let g:onedark_termcolors=16
@@ -146,7 +147,7 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 "show git add/edit/delet
 let g:airline#extensions#hunks#enabled = 1
 
-let g:airline_theme='onedark'
+" let g:airline_theme='onedark'
 let g:airline_powerline_fonts = 1
 
 " change buffer separator
@@ -256,10 +257,12 @@ nnoremap <C-l> <C-w>l
 nnoremap ,/ :nohlsearch<CR>
 
 " copy selection to clipboard
-vnoremap <leader>y "*y<CR>
+set clipboard=unnamedplus
+" vnoremap <leader>y "*y<CR>
+vnoremap <leader>y "+y<CR>
+vnoremap <leader>p "+p<CR>
 
 "Searching tools configs
-
 "Ag config
 let g:ag_working_path_mode="r"
 
@@ -271,6 +274,10 @@ let g:ignore_dirs = "log/ coverage/"
 if exists("g:ignore_dirs")
   let g:ag_prg.=" --ignore ".join(split(g:ignore_dirs), " --ignore ")
 endif
+
+" ctrlp configs
+let g:ctrlp_max_files=0
+let g:ctrlp_max_depth=40
 
 "nnoremap <C-F> :Ack<space>
 "open searcher
